@@ -1,0 +1,20 @@
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    height: 100vh;
+    background-color: #F5F5F5;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 1.8rem;
+    max-width: 560px;
+}
+
+.form-content {
+    padding: 3rem 2rem;
+}
+
+.welcome {
+    text-align: center;
+}

@@ -1,0 +1,88 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #F5F5F5;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-statment {
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    margin-right: 1.4rem;
+    transition: scale 0.3s ease;
+}
+
+.card:hover {
+    scale: 1.05;
+}
+
+.btn {
+    width: 10rem;
+    height: 3rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-card {
+    background-color: #292b2c;
+    color: #fff;
+}
+
+.btn-card:hover {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #999;
+}
+
+.table {
+    border-collapse: collapse;
+    margin: 2rem 0;
+    width: 100%;
+    min-width: 60vh;
+}
+
+.table thead tr {
+    background-color: #6892A3;
+    color: #fff;
+    text-align: left;
+    font-weight: 700;
+}
+
+.table th, .table td {
+    padding: 0.8rem 1rem;
+    text-align: center;
+}
+
+.table tbody tr {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f36d;
+}
+
+.table tbody tr td:last-of-type {
+    transition: color 0.2s ease;
+}
+
+.table tbody tr td:last-of-type:hover {
+    color: #1ac2e3;
+    cursor: pointer;
+}
