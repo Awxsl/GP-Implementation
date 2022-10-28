@@ -11,6 +11,7 @@ body {
 
 .welcome-statment {
     text-align: center;
+    margin-bottom: 3rem;
 }
 
 .cards {
@@ -54,7 +55,7 @@ body {
     border-collapse: collapse;
     margin: 2rem 0;
     width: 100%;
-    min-width: 60vh;
+    min-width: 60%;
 }
 
 .table thead tr {
@@ -85,4 +86,21 @@ body {
 .table tbody tr td:last-of-type:hover {
     color: #1ac2e3;
     cursor: pointer;
+}
+
+
+@media screen and (max-width: 786px) {
+    .cards {
+        flex-direction: column;
+    }
+    
+    .card {
+        margin-bottom: 1.5rem;
+        margin-right: 0;
+        padding: 1rem;
+    }
+
+    .table {
+        min-width: auto;
+    }
 }

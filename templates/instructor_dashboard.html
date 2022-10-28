@@ -17,12 +17,12 @@
             <div class="card">
                <h2>Face Recognition</h2>
                <p>Start the face recognition for a specific section</p>
-               <button class="btn btn-card">Start</button> 
+               <button onclick="openFR()" class="btn btn-card">Start</button> 
             </div>
             <div class="card">
                 <h2>Crowd Counting</h2>
                 <p>Get the total number of people present in an area</p>
-                <button class="btn btn-card">Start</button> 
+                <button onclick="openCC()" class="btn btn-card">Start</button> 
             </div>
         </div>
         <table class="table">
@@ -64,4 +64,14 @@
         </table>
     </main>
 </body>
+
+<script>
+    function openFR() {
+        window.open("../templates/face_recognition.html");
+    }
+    function openCC() {
+        window.open("../templates/crowd_counting.html");
+    }
+</script>
+
 </html>

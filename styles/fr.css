@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #F5F5F5;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1140px;
+    display: flex;
+}
+
+.names-card {
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.student-name {
+    margin: 0.2rem 0 0 1rem;
+    font-weight: 400;
+}
+
+.student-icon {
+    background-color: #eee;
+    padding: 7px;
+    border-radius: 50%;
+}
+
+.name {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.name:last-of-type {
+    margin-bottom: 0;
+}
+
+.attended {
+    background-color: green;
+    color: rgb(255, 255, 255);
+}
+
+.absent {
+    background-color: #FF5733;
+    color: #fff;
+}
+
+.late {
+    background-color: #FFC300;
+    color: #fff;
+}
+
+.btn {
+    width: 25rem;
+    height: 4rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-card {
+    background-color: #292b2c;
+    color: #fff;
+    margin-top: 2rem;
+}
+
+.btn-card:hover {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #999;
+}
+
+@media screen and (max-width: 920px) {
+    .container {
+        flex-direction: column;
+    }
+}
