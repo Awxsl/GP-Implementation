@@ -57,8 +57,8 @@ class Course(models.Model):
         return self.course_code + ' - ' + self.name
 
 class Section(models.Model):
-    course_id = models.ForeignKey(Course, on_delete=models.PROTECT, verbose_name='Course')
-    instructor_id = models.ForeignKey(Instructor, on_delete=models.PROTECT, verbose_name='Instructor')
+    course = models.ForeignKey(Course, on_delete=models.PROTECT, verbose_name='Course', default='1')
+    instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT, verbose_name='Instructor', default='1')
 
     class Meta:
         db_table = 'Sections'
@@ -67,8 +67,8 @@ class Section(models.Model):
         return 'Section ' + str(self.id)
 
 class RegisteredStudents(models.Model):
-    section_id = models.ForeignKey(Section, on_delete=models.CASCADE, verbose_name='Section')
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Student')
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, verbose_name='Section', default='1')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Student', default='1')
 
     class Meta:
         db_table = 'Registered_Students'
@@ -77,8 +77,8 @@ class RegisteredStudents(models.Model):
         return f'{self.section_id} - {self.student_id}'
 
 class Absence(models.Model):
-    section_id = models.ForeignKey(Section, on_delete=models.CASCADE, verbose_name='Section')
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Student')
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, verbose_name='Section', default='1')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Student', default='1')
     is_absent = models.BooleanField(default=True)
     Date = models.DateField(auto_now_add=True)
 
@@ -91,7 +91,7 @@ class Absence(models.Model):
 class CrowdCount(models.Model):
     attendees_count = models.IntegerField()
     Date = models.DateField(auto_now_add=True)
-    instructor_id = models.ForeignKey(Instructor, on_delete=models.PROTECT, verbose_name='Instructor')
+    instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT, verbose_name='Instructor', default='1')
 
     class Meta:
         db_table = 'Crowd_Count'
