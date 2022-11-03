@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 import debug_toolbar
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.site.site_header = 'Attendance System'
 admin.site.index_title = 'Admin'
@@ -23,5 +25,10 @@ admin.site.index_title = 'Admin'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
-    path('fr/', include('FaceRecognition.urls'))
+    path('fr/', include('FaceRecognition.urls')),
+    path('test/', include('FaceRecognition.urls')),
+    path('', include('FaceRecognition.urls')),
+    path('student_dashboard/', include('FaceRecognition.urls')),
+    path('instructor_dashboard/', include('FaceRecognition.urls'))
+   
 ]

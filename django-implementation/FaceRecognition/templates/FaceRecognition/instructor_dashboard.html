@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <h1 class="welcome-statment">Welcome, {{name}}</h1>
+        <div class="cards">
+            <div class="card">
+               <h2>Face Recognition</h2>
+               <p>Start the face recognition for a specific section</p>
+               <button onclick="openFR()" class="btn btn-card">Start</button> 
+            </div>
+            <div class="card">
+                <h2>Crowd Counting</h2>
+                <p>Get the total number of people present in an area</p>
+                <button onclick="openCC()" class="btn btn-card">Start</button> 
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Course Name</th>
+                    <th># of Students</th>
+                    <th>Section</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AI123</td>
+                    <td>Artificial Intellegence</td>
+                    <td>13</td>
+                    <td>1134</td>
+                </tr>
+                <tr>
+                    <td>CS313</td>
+                    <td>Computer Graphics</td>
+                    <td>11</td>
+                    <td>1432</td>
+                </tr>
+                <tr>
+                    <td>ISA23</td>
+                    <td>Computer Vision</td>
+                    <td>34</td>
+                    <td>3122</td>
+                </tr>
+                <tr>
+                    <td>GP141</td>
+                    <td>Graduation Project</td>
+                    <td>14</td>
+                    <td>1411</td>
+                </tr>
+            </tbody>
+    
+        </table>
+    </main>
+</body>
+
+<script>
+    function openFR() {
+        window.open("./face_recognition.html");
+    }
+    function openCC() {
+        window.open("./crowd_counting.html");
+    }
+</script>
+
+</html>
