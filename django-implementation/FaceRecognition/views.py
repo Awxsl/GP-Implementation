@@ -68,3 +68,27 @@ def instructor_dashboard(request):
         return redirect(index)
     
     return render(request, 'FaceRecognition/instructor_dashboard.html', {'name': name})
+
+
+def choose_section(request):
+    global username
+    if username == '':
+        return redirect(index)
+    
+    return render(request, 'FaceRecognition/choose_section.html')
+
+
+def face_recognition(request):
+    global username
+    if username == '':
+        return redirect(index)
+    
+    return render(request, 'FaceRecognition/face_recognition.html')
+
+
+def crowd_counting(request):
+    global username
+    if username == '':
+        return redirect(index)
+    
+    return render(request, 'FaceRecognition/crowd_counting.html')

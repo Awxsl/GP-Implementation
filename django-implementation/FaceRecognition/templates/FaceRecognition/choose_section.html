@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'choose_section/fr.css' %}">
+    <script src="{% static 'js/choose_section.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <h2 class="welcome-statment">Please choose the relevent section:</h2>
+        <div class="cards">
+            <div class="card">
+                <h3 class="card-title">AI123 - Artificial Intellegence</h3>
+                <ul class="section-information">
+                    <li>13 Students</li>
+                    <li>Monday, Tuesday</li>
+                    <li>11:00am-11:50am</li>
+                </ul>
+                <button onclick="openPage()" class="btn btn-card" >Select</button>
+            </div>
+            <div class="card">
+                <h3 class="card-title">CS313 - Computer Graphics</h3>
+                <ul class="section-information">
+                    <li>11 Students</li>
+                    <li>Sunday, Thursday</li>
+                    <li>1:00pm-1:50pm</li>
+                </ul>
+                <button onclick="openPage()" class="btn btn-card" >Select</button>
+            </div>
+            <div class="card">
+                <h3 class="card-title">ISA23 - Computer Vision</h3>
+                <ul class="section-information">
+                    <li>34 Students</li>
+                    <li>Tuesday, Wednesday</li>
+                    <li>2:00pm-3:50pm</li>
+                </ul>
+                <button onclick="openPage()" class="btn btn-card" >Select</button>
+            </div>
+            <div class="card">
+                <h3 class="card-title">GP141 - Graduation Project</h3>
+                <ul class="section-information">
+                    <li>14 Students</li>
+                    <li>Monday, Tuesday</li>
+                    <li>8:00am-9:50am</li>
+                </ul>
+                <button onclick="openPage()" class="btn btn-card" >Select</button>
+            </div>
+            <div class="card">
+                <h3 class="card-title">DA453 - Data Structures</h3>
+                <ul class="section-information">
+                    <li>18 Students</li>
+                    <li>Sunday, Tuesday</li>
+                    <li>10:00am-11:50am</li>
+                </ul>
+                <button onclick="openPage()" class="btn btn-card" >Select</button>
+            </div>
+            <div class="card" id="card">
+                <h3 class="card-title">SE232 - Software Engineering</h3>
+                <ul class="section-information">
+                    <li>21 Students</li>
+                    <li>Wednesday, Thursday</li>
+                    <li>2:00pm-3:50pm</li>
+                </ul>
+                <button onclick="openPage()" class="btn btn-card" >Select</button>
+            </div>
+        </div>
+    </main>
+    <button onclick="back()" class="btn btn-card btn-back" >Back</button>
+</body>
+
+<script>
+    function openPage() {
+        window.open("../templates/face_recognition.html");
+    }
+    function back() {
+        window.open("../templates/instructor_dashboard.html");
+    }
+</script>
+
+</html>
