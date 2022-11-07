@@ -13,59 +13,51 @@
 </head>
 <body>
     <main class="container">
-        <h1 class="welcome-statment">Welcome, {{name}}</h1>
-        <table class="table" id="table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Code</th>
                     <th>Course Name</th>
-                    <th># of Absences</th>
-                    <th>Absence Percentage</th>
-                    <th>Section</th>
+                    <th>Date</th>
+                    <th>Excused?</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>AI123</td>
                     <td>Artificial Intellegence</td>
-                    <td>4</td>
-                    <td>5.12%</td>
-                    <td class="section-select">1134</td>
+                    <td>11/09/2022</td>
+                    <td>NO</td>
                 </tr>
                 <tr>
-                    <td>CS313</td>
-                    <td>Computer Graphics</td>
-                    <td>8</td>
-                    <td>8.67%</td>
-                    <td>1432</td>
+                    <td>AI123</td>
+                    <td>Artificial Intellegence</td>
+                    <td>19/10/2022</td>
+                    <td>NO</td>
                 </tr>
                 <tr>
-                    <td>ISA23</td>
-                    <td>Computer Vision</td>
-                    <td>0</td>
-                    <td>0%</td>
-                    <td>3122</td>
+                    <td>AI123</td>
+                    <td>Artificial Intellegence</td>
+                    <td>20/10/2022</td>
+                    <td>YES</td>
                 </tr>
                 <tr>
-                    <td>KH445</td>
-                    <td>Kingdom History</td>
-                    <td>13</td>
-                    <td>24.99%</td>
-                    <td>2233</td>
+                    <td>AI123</td>
+                    <td>Artificial Intellegence</td>
+                    <td>09/11/2022</td>
+                    <td>NO</td>
                 </tr>
             </tbody>
 
         </table>
+        <button onclick="back()" class="btn btn-card btn-long">Back</button>
+
     </main>
 </body>
 
 <script>
-    section = document.getElementById('table')
-
-    section.addEventListener('click', (e) => {
-        if (e.target.classList.contains('section-select')) {
-            window.open('/absence_table/', "_self")
-        } 
-    })
+    function back() {
+        window.open('/student_dashboard', '_self')
+    }
 </script>
 </html>

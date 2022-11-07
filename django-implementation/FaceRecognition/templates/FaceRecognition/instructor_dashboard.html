@@ -26,7 +26,7 @@
                 <button onclick="openCC()" class="btn btn-card">Start</button> 
             </div>
         </div>
-        <table class="table">
+        <table class="table" id="table">
             <thead>
                 <tr>
                     <th>Code</th>
@@ -40,7 +40,7 @@
                     <td>AI123</td>
                     <td>Artificial Intellegence</td>
                     <td>13</td>
-                    <td>1134</td>
+                    <td class="student-select">1134</td>
                 </tr>
                 <tr>
                     <td>CS313</td>
@@ -73,6 +73,14 @@
     function openCC() {
         window.open("/crowd_counting", "_self");
     }
+
+    section = document.getElementById('table')
+
+    section.addEventListener('click', (e) => {
+        if (e.target.classList.contains('student-select')) {
+            window.open('/student_list/', "_self")
+        } 
+    })
 </script>
 
 </html>

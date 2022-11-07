@@ -60,6 +60,11 @@ def student_dashboard(request):
         return redirect(index)
 
     return render(request, 'FaceRecognition/student_dashboard.html', {'name': name})
+
+
+def absence_table(request):
+
+    return render(request, 'FaceRecognition/absence_table.html')
     
 
 def instructor_dashboard(request):
@@ -92,3 +97,7 @@ def crowd_counting(request):
         return redirect(index)
     
     return render(request, 'FaceRecognition/crowd_counting.html')
+
+def student_list(request):
+    
+    return render(request, 'FaceRecognition/student_list.html')

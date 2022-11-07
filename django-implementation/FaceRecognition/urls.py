@@ -9,4 +9,6 @@ urlpatterns = [
     path('choose_section/', views.choose_section),
     path('face_recognition/', views.face_recognition),
     path('crowd_counting/', views.crowd_counting),
+    path('absence_table/', views.absence_table),
+    path('student_list/', views.student_list),
 ]
