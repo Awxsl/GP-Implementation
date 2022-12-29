@@ -27,6 +27,7 @@ class StudentAdmin(admin.ModelAdmin):
     ordering = ['id']
     list_per_page = 20
 
+
 @admin.register(models.Instructor)
 class InstructorAdmin(admin.ModelAdmin):
     list_display = ['id', 'username']
@@ -49,4 +50,10 @@ class CrowdCountAdmin(admin.ModelAdmin):
 class AbsenceAdmin(admin.ModelAdmin):
     list_display = ['id', 'student_id', 'section_id', 'Date']
     ordering = ['id']
+    list_per_page = 20
+
+@admin.register(models.ImageEncodings)
+class ImageEncodingAdmin(admin.ModelAdmin):
+    list_display = ['student', 'encoding']
+    ordering = ['student']
     list_per_page = 20

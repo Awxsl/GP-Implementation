@@ -37,6 +37,8 @@ class Instructor(models.Model):
 
 class Student(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, unique=True, verbose_name='User')
+    student_image = models.ImageField(upload_to='images/', null=True)
+    is_encoded = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'Students'
@@ -98,3 +100,12 @@ class CrowdCount(models.Model):
 
     def __str__(self) -> str:
         return f'Count #{self.id}'
+
+
+class ImageEncodings(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    encoding = models.BinaryField()
+
+
+class AttendeesImage(models.Model):
+    image = models.ImageField(upload_to='images/')

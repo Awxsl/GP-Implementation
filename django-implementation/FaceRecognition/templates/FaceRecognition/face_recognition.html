@@ -13,59 +13,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
+
     <main class="container">
-        <div class="video-wrap">
-            <video id="video" playsinline autoplay></video>
+        <div class="video-wrap" id="video_feed">
+            
         </div>
-        <div class="names-card">
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdullah Naffa Al-Suhaimy</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Ahmed Yousef Ghouth</h4>
-            </div>
-            <div class="name">
-                <i class="absent student-icon fa-regular fa-x"></i>
-                <h4 class="student-name">Omar Abdulaziz Al-Turki</h4>
-            </div>
-            <div class="name">
-                <i class="absent student-icon fa-regular fa-x"></i>
-                <h4 class="student-name">Sultan Fahad Al-Juhani</h4>
-            </div>
-            <div class="name">
-                <i class="absent student-icon fa-regular fa-x"></i>
-                <h4 class="student-name">Omar Abdulaziz Khan</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdulrahman Nouh</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdullah Saad Al-Mutairi</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdulhamid Baker Harras</h4>
-            </div>
-            <div class="name">
-                <i class="late student-icon fa-regular fa-clock"></i>
-                <h4 class="student-name">Ali Ismail</h4>
-            </div>
+
+        <div class="display-pic">
+
         </div>
+
     </main>
+    <button onclick="takeSnapshot()" class="btn btn-card">Click</button>
     <button onclick="openInstructorDashboard()" class="btn btn-card">Back</button>
+
 
 
 </body>
 
-<script src="{% static 'js/enable_camera.js' %}"></script>
+<!-- <script src="{% static 'js/enable_camera.js' %}"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js" integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+    
+    const ImageEndpoint = 'http://127.0.0.1:8000/store_image/'
+
+    Webcam.set({
+        width: 600,
+        height: 480, 
+        image_format: 'jpeg',
+        jpeg_quality: 100
+    })
+    Webcam.attach('#video_feed')
+
+    function takeSnapshot() {
+        Webcam.snap(function (data_uri)  {
+            // document.querySelector('.display-pic').innerHTML = '<img src="'+data_uri+'" download="mamamasdad.jpeg"/>'
+            downloadImage('attendance', data_uri)
+            setTimeout(goToReults, 2000)
+        })
+    }
+
+    downloadImage = function (name, datauri) {
+        var a = document.createElement('a');
+        a.setAttribute('download', name + '.jpeg');
+        a.setAttribute('href', datauri);
+        a.click();
+    }
+
     function openInstructorDashboard() {
         window.open("/instructor_dashboard", "_self");
+    }
+
+    function goToReults() {
+        window.open("/results/", "_self")
     }
 </script>
 

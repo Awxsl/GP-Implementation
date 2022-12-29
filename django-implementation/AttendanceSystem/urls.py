@@ -30,5 +30,4 @@ urlpatterns = [
     path('', include('FaceRecognition.urls')),
     path('student_dashboard/', include('FaceRecognition.urls')),
     path('instructor_dashboard/', include('FaceRecognition.urls'))
-   
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

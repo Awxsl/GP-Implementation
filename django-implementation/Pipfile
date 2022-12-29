@@ -9,6 +9,8 @@ django-debug-toolbar = "==3.7.0"
 mysqlclient = "==2.1.1"
 asgiref = "==3.5.2"
 sqlparse = "==0.4.3"
+django-rest-framework = "*"
+drf-extra-fields = "*"
 
 [dev-packages]
 

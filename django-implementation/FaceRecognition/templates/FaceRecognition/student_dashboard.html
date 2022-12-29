@@ -6,12 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/header_footer.css' %}">
+
 </head>
 <body>
+
+    <header>
+        <nav class="nav-bar max">
+            <img src={% static 'Site_Icon.jpg' %} alt="" class="nav-icon">
+            <ul class="nav-items">
+                <li class="nav-item">Home</li>
+                <li class="nav-item">My Profile</li>
+                <li class="nav-item">Log Out</li>
+            </ul>
+        </nav>
+    </header>
+
     <main class="container">
         <h1 class="welcome-statment">Welcome, {{name}}</h1>
         <table class="table" id="table">
@@ -57,7 +73,39 @@
 
         </table>
     </main>
+
+    <footer>
+        <section class="footer max">
+            <article class="company-info">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non consequatur dolore, fuga vitae accusamus quos? Animi repellendus in saepe necessitatibus id iure molestiae expedita incidunt, totam optio harum perferendis nobis odio accusantium. Voluptate ea est eaque accusantium quaerat doloribus ducimus. </p>
+                <div class="social-media">
+                    <i class="fa-brands fa-facebook-f s-icon"></i>
+                    <i class="fa-brands fa-twitter s-icon"></i>
+                    <i class="fa-brands fa-linkedin-in s-icon"></i>
+                    <i class="fa-brands fa-instagram s-icon"></i>
+                </div>
+            </article>
+            <article class="footer-links">
+                <ul class="links">
+                    <h5 class="links-heading">Home</h5>
+                    <li class="link">About us</li>
+                    <li class="link">Get Started</li>
+                    <li class="link">Privacy Policy</li>
+                    <li class="link">More</li>
+                </ul>
+                <ul class="links">
+                    <h5 class="links-heading">Contact Us</h5>
+                    <li class="link">Awxsl@courses.com</li>
+                    <li class="link">+966508742909</li>
+                    <li class="link">Madinah, Saudi Arabia</li>
+                </ul>
+            </article>
+        </section>
+    </footer>
+
 </body>
+
+
 
 <script>
     section = document.getElementById('table')
