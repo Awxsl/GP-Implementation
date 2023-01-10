@@ -24,6 +24,7 @@ class SectionAdmin(admin.ModelAdmin):
 @admin.register(models.Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ['id', 'username']
+    readonly_fields=('is_encoded',)
     ordering = ['id']
     list_per_page = 20
 
@@ -57,3 +58,4 @@ class ImageEncodingAdmin(admin.ModelAdmin):
     list_display = ['student', 'encoding']
     ordering = ['student']
     list_per_page = 20
+    

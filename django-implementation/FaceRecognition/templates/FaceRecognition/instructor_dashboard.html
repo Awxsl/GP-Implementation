@@ -41,43 +41,45 @@
                 <button onclick="openCC()" class="btn btn-card">Start</button> 
             </div>
         </div>
-        <table class="table" id="table">
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Course Name</th>
-                    <th># of Students</th>
-                    <th>Section</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>AI123</td>
-                    <td>Artificial Intellegence</td>
-                    <td>13</td>
-                    <td class="student-select">1134</td>
-                </tr>
-                <tr>
-                    <td>CS313</td>
-                    <td>Computer Graphics</td>
-                    <td>11</td>
-                    <td>1432</td>
-                </tr>
-                <tr>
-                    <td>ISA23</td>
-                    <td>Computer Vision</td>
-                    <td>34</td>
-                    <td>3122</td>
-                </tr>
-                <tr>
-                    <td>GP141</td>
-                    <td>Graduation Project</td>
-                    <td>14</td>
-                    <td>1411</td>
-                </tr>
-            </tbody>
-    
-        </table>
+        <form action="/student_list/" method="post">
+            {% csrf_token %}
+            <table class="table" id="table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Course Name</th>
+                        <th># of Students</th>
+                        <th>Section</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AI123</td>
+                        <td>Artificial Intellegence</td>
+                        <td>13</td>
+                        <td class="student-select">1134</td>
+                    </tr>
+                    <tr>
+                        <td>CS313</td>
+                        <td>Computer Graphics</td>
+                        <td>11</td>
+                        <td>1432</td>
+                    </tr>
+                    <tr>
+                        <td>ISA23</td>
+                        <td>Computer Vision</td>
+                        <td>34</td>
+                        <td>3122</td>
+                    </tr>
+                    <tr>
+                        <td>GP141</td>
+                        <td>Graduation Project</td>
+                        <td>14</td>
+                        <td>1411</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
     </main>
 
     <footer>
@@ -112,10 +114,10 @@
 
 <script>
     function openFR() {
-        window.open("/choose_section", "_self");
+        window.open("/choose_section/", "_self");
     }
     function openCC() {
-        window.open("/crowd_counting", "_self");
+        window.open("/crowd_counting/", "_self");
     }
 
     section = document.getElementById('table')

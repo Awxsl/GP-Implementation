@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/fr.css' %}">
+    <script src="{% static 'js/manual_attendance.js' %}" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
@@ -19,55 +20,37 @@
         <div class="attendees-image">
             <img src={% static 'images/detected_faces.jpg' %} alt="" class="image">
         </div>
-        <div class="names-card">
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdullah Naffa Al-Suhaimy</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Ahmed Yousef Ghouth</h4>
-            </div>
-            <div class="name">
-                <i class="absent student-icon fa-regular fa-x"></i>
-                <h4 class="student-name">Omar Abdulaziz Al-Turki</h4>
-            </div>
-            <div class="name">
-                <i class="absent student-icon fa-regular fa-x"></i>
-                <h4 class="student-name">Sultan Fahad Al-Juhani</h4>
-            </div>
-            <div class="name">
-                <i class="absent student-icon fa-regular fa-x"></i>
-                <h4 class="student-name">Omar Abdulaziz Khan</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdulrahman Nouh</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdullah Saad Al-Mutairi</h4>
-            </div>
-            <div class="name">
-                <i class="attended student-icon fa-solid fa-check"></i>
-                <h4 class="student-name">Abdulhamid Baker Harras</h4>
-            </div>
-            <div class="name">
-                <i class="late student-icon fa-regular fa-clock"></i>
-                <h4 class="student-name">Ali Ismail</h4>
-            </div>
+        <div class="names-card" id="cards">
+            {% for student, status in names %}
+            
+                <div class="name">
+                    {% if status is False %}
+                    <i class="attended student-icon fa-solid fa-check"></i>
+                
+                    {% else %}
+                    <i class="absent student-icon fa-regular fa-x"></i>
+                    {% endif %}
+                    <h4 class="student-name">{{ student }}</h4>
+                
+                </div>
+
+
+            {% endfor %}
+            
+            <button  class="btn btn-card" id="buttn" onclick="openInstructorDashboard()">Submit</button>
+
+
         </div>
     </main>
     <button onclick="openInstructorDashboard()" class="btn btn-card">Back</button>
-
-
 </body>
 
 
 <script>
     function openInstructorDashboard() {
-        window.open("/instructor_dashboard", "_self");
+        window.open("/instructor_dashboard/", "_self");
     }
+
 </script>
 
 </html>

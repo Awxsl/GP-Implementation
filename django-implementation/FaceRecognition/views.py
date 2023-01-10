@@ -133,69 +133,76 @@ def crowd_counting(request):
 
 
 def student_list(request):
-
     return render(request, 'FaceRecognition/student_list.html')
 
 
 def results(request):
-    attendees = []
-    registered_faces = []
-    names = []
-    encodings = ImageEncodings.objects.all()
-    
-    for image in encodings:
-        np_bytes = base64.b64decode(image.encoding)
-        np_array = pickle.loads(np_bytes)
-        registered_faces.append(np_array)
-        names.append(image.student.username.first_name)
+    try:
+        attendees = []
+        attendance_status = []
+        registered_faces = []
+        names = []
+        encodings = ImageEncodings.objects.all()
+        matches1 = []
+        
+        for image in encodings:
+            np_bytes = base64.b64decode(image.encoding)
+            np_array = pickle.loads(np_bytes)
+            registered_faces.append(np_array)
+            names.append(image.student.username.first_name)
 
 
-    attendees_image = face_recognition.load_image_file('FaceRecognition\\static\\images\\attendance.jpeg')
-    face_locations = face_recognition.face_locations(attendees_image)
-    face_encodings = face_recognition.face_encodings(attendees_image, face_locations)
-    pil_image = Image.fromarray(attendees_image)
-    draw = ImageDraw.Draw(pil_image)
-    
-    for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
-        matches = face_recognition.compare_faces(registered_faces, face_encoding)
-        name = "Unknown"
+        attendees_image = face_recognition.load_image_file('FaceRecognition\\static\\images\\attendance.jpeg')
+        face_locations = face_recognition.face_locations(attendees_image)
+        face_encodings = face_recognition.face_encodings(attendees_image, face_locations)
+        pil_image = Image.fromarray(attendees_image)
+        draw = ImageDraw.Draw(pil_image)
+        
+        for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
+            matches = face_recognition.compare_faces(registered_faces, face_encoding)
+            name = "Unknown"
 
-        face_distances = face_recognition.face_distance(registered_faces, face_encoding)
-        best_match_index = np.argmin(face_distances)
-        if matches[best_match_index]:
-            name = names[best_match_index]
-            
-
-
-            
+            face_distances = face_recognition.face_distance(registered_faces, face_encoding)
+            best_match_index = np.argmin(face_distances)
+            if matches[best_match_index]:
+                name = names[best_match_index]
+                matches1.append(best_match_index)
 
 
-        # Draw a box around the face using the Pillow module
-        draw.rectangle(((left, top), (right, bottom)), outline=(0, 0, 255))
+            # Draw a box around the face using the Pillow module
+            draw.rectangle(((left, top), (right, bottom)), outline=(0, 0, 255))
 
-        # Draw a label with a name below the face
-        text_width, text_height = draw.textsize(name)
-        draw.rectangle(((left, bottom - text_height - 10), (right, bottom)), fill=(0, 0, 255), outline=(0, 0, 255))
-        draw.text((left + 6, bottom - text_height - 5), name, fill=(255, 255, 255, 255))
+            # Draw a label with a name below the face
+            text_width, text_height = draw.textsize(name)
+            draw.rectangle(((left, bottom - text_height - 10), (right, bottom)), fill=(0, 0, 255), outline=(0, 0, 255))
+            draw.text((left + 6, bottom - text_height - 5), name, fill=(255, 255, 255, 255))
+        print(matches)
+        print(matches1)
+        for index, result in enumerate(matches): 
 
-    for index, result in enumerate(matches): 
-        if result == True:
-            status = False
-        else: 
-            status = True
+            abscence = Absence()
+            student_id = ImageEncodings.objects.get(pk=index+84).student.pk
 
-        abscence = Absence()
-        student_id = ImageEncodings.objects.get(pk=index+1).student.pk
-        abscence.student = Student(pk=student_id)
-        abscence.section = Section(pk='1')
-        abscence.is_absent = status
-        abscence.save()
-        print('created')
+            if student_id-8 in matches1:
+                status = False
+            else: 
+                status = True
 
-    del draw
+            abscence.student = Student(pk=student_id)
+            student_name = Student.objects.get(pk=student_id)
+            attendees.append(student_name)
+            attendance_status.append(status)
+            abscence.section = Section(pk='1')
+            abscence.is_absent = status
+            abscence.save()
 
-    pil_image.save("FaceRecognition\\static\\images\\detected_faces.jpg")
-    return render(request, 'FaceRecognition/submit_records.html')
+        del draw
+
+        pil_image.save("FaceRecognition\\static\\images\\detected_faces.jpg")
+        return render(request, 'FaceRecognition/submit_records.html', {'names': zip(attendees, attendance_status)})
+
+    except Exception as e:
+            return render(request, 'FaceRecognition/face_recognition.html', {'error': e})
 
 
 

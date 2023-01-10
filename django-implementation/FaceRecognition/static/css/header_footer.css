@@ -19,12 +19,26 @@ body {
     margin: 0;
 }
 
+.form-submit {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.4rem;
+}
+
 /* Navigation Bar */
 header {
     /* background-color: hsl(217, 28%, 15%); */
     background-color: #fff;
     min-width: 100%;
     margin-bottom: 5rem;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .max {
@@ -39,7 +53,7 @@ header {
 }
 
 .nav-icon {
-    height: 8rem;
+    height: 6rem;
 }
 
 .nav-items {
@@ -183,11 +197,12 @@ main {
     background-color: #f3f3f36d;
 }
 
-.table tbody tr td:last-of-type {
+.table tbody tr td:last-of-type, .form-submit {
     transition: color 0.2s ease;
+    
 }
 
-.table tbody tr td:last-of-type:hover {
+.table tbody tr td:last-of-type:hover, .form-submit:hover {
     color: #1ac2e3;
     cursor: pointer;
 }
@@ -235,7 +250,7 @@ ul {
 }
 
 
-ul h5 {
+ul h5{
   margin: 0.5rem 0 2rem 0;
   color: #fff;
   font-size: 1.5rem;

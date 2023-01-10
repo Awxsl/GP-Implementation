@@ -14,6 +14,12 @@
 </head>
 <body>
 
+    {% if error %}
+    <div class="error-message">
+        <i class="message-icon fa-solid fa-triangle-exclamation"></i>
+        <p class="error">{{ error }}</p>
+    </div>
+    {% endif %}
 
     <main class="container">
         <div class="video-wrap" id="video_feed">
@@ -40,6 +46,7 @@
     
     const ImageEndpoint = 'http://127.0.0.1:8000/store_image/'
 
+
     Webcam.set({
         width: 600,
         height: 480, 
@@ -52,6 +59,7 @@
         Webcam.snap(function (data_uri)  {
             // document.querySelector('.display-pic').innerHTML = '<img src="'+data_uri+'" download="mamamasdad.jpeg"/>'
             downloadImage('attendance', data_uri)
+            changeImage()
             setTimeout(goToReults, 2000)
         })
     }
@@ -64,12 +72,18 @@
     }
 
     function openInstructorDashboard() {
-        window.open("/instructor_dashboard", "_self");
+        window.open("/instructor_dashboard/", "_self");
     }
 
     function goToReults() {
         window.open("/results/", "_self")
     }
+
+    function changeImage() {
+        const videofeed = document.getElementById('video_feed')
+        videofeed.innerHTML = "<img src={% static 'Loading.gif' %} class='image'>"
+    }
+
 </script>
 
 </html>
