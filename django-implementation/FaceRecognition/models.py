@@ -1,9 +1,11 @@
 import email
 from email.policy import default
 from enum import unique
+from django.core.exceptions import ValidationError
 from random import choices
 from tabnanny import verbose
 from django.db import models
+import re
 
 class User(models.Model):
     USER_TYPE = [
@@ -24,6 +26,11 @@ class User(models.Model):
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
+
+    def clean(self):
+        pattern = re.compile("^(05){1}[0-9]{8}$")
+        if not pattern.match(self.phone):
+            raise ValidationError("Phone number is incorrect! It must be in the following format: 05XXXXXXXX")
 
 class Instructor(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, unique=True, verbose_name='User')

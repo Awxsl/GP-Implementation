@@ -11,30 +11,99 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="{% static 'js/enable_camera.js' %}" defer></script>
-
 </head>
 <body>
-    
-    <main class="container">
-        <div class="video-wrap">
-            <video id="video" playsinline autoplay></video>
-        </div>
-    </main>
-    <h2>Crowd Count is: 0</h2>
-    <button onclick="openInstructorDashboard()" class="btn btn-card">Back</button>
-    
 
+    {% if error %}
+    <div class="error-message">
+        <i class="message-icon fa-solid fa-triangle-exclamation"></i>
+        <p class="error">{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <main class="container">
+        <div class="video-wrap" id="video_feed">
+            
+        </div>
+
+        <div class="display-pic">
+
+        </div>
+
+    </main>
+    <div class="buttons">
+        <button onclick="takeSnapshot()" class="btn btn-card">Capture</button>
+        <button onclick="uploadImage()" class="btn btn-card btn-upload" id="upload"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</button>
+    </div>
+    <button onclick="openInstructorDashboard()" class="btn btn-card">Back</button>
+    <input type="file" hidden id="file_input">
 
 
 </body>
 
+<!-- <script src="{% static 'js/enable_camera.js' %}"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js" integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-    function openInstructorDashboard() {
-        window.open("/instructor_dashboard", "_self");
+    
+    const ImageEndpoint = 'http://127.0.0.1:8000/store_image/'
+    const upload_btn = document.getElementById('upload')
+    const input_btn = document.getElementById('file_input')
+
+
+    Webcam.set({
+        width: 600,
+        height: 480, 
+        image_format: 'jpg',
+        jpeg_quality: 100
+    })
+    Webcam.attach('#video_feed')
+
+    function takeSnapshot() {
+        Webcam.snap(function (data_uri)  {
+            // document.querySelector('.display-pic').innerHTML = '<img src="'+data_uri+'" download="mamamasdad.jpeg"/>'
+            downloadImage('crowd', data_uri)
+            changeImage()
+            setTimeout(goToReults, 2000)
+        })
     }
+
+    downloadImage = function (name, datauri) {
+        var a = document.createElement('a');
+        a.setAttribute('download', name + '.jpg');
+        a.setAttribute('href', datauri);
+        a.click();
+    }
+
+    function openInstructorDashboard() {
+        window.open("/instructor_dashboard/", "_self");
+    }
+
+    function goToReults() {
+        window.open("/get_count/", "_self")
+    }
+
+    function changeImage() {
+        const videofeed = document.getElementById('video_feed')
+        videofeed.innerHTML = "<img src={% static 'Loading.gif' %} class='image'>"
+    }
+
+    function uploadImage() {
+        upload_btn.addEventListener('mousedown', () => {
+            input_btn.click()
+        })
+        
+        input_btn.onchange = function() {
+            const objectURL = window.URL.createObjectURL(input_btn.files[0]);
+            downloadImage('crowd', objectURL)
+            setTimeout(goToReults, 1000)
+  };    
+    }
+
+
+
+
 </script>
 
 </html>
-

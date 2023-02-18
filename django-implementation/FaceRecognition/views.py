@@ -10,6 +10,9 @@ import os, shutil, pickle, base64
 import face_recognition
 from PIL import Image, ImageDraw
 import numpy as np
+from lwcc import LWCC
+import matplotlib.pyplot as plt
+
 
 
 # Create your views here.
@@ -108,15 +111,6 @@ def face_identification(request):
         encoding.encoding = base64image
         encoding.save()
         Student.objects.filter(pk=obj.pk).update(is_encoded=True)
-        # student = Student(pk=obj.pk)
-        # print(student.is_encoded)
-        # # print(student)
-        # student.is_encoded = True
-        # student.save()
-
-
-        
-
     return render(request, 'FaceRecognition/face_recognition.html')
 
 
@@ -125,11 +119,43 @@ def crowd_counting(request):
     if username == '':
         return redirect(index)
     
-    np_bytes = base64.b64decode(ImageEncodings.objects.filter(pk=79)[0].encoding)
-    np_array = pickle.loads(np_bytes)
-    print(np_array)
+    DeleteImages()
     
     return render(request, 'FaceRecognition/crowd_counting.html')
+
+def get_count(request): 
+    os.environ['KMP_DUPLICATE_LIB_OK']='True'
+    img_path = 'FaceRecognition\static\images\crowd.jpg'
+    img = Image.open(img_path).convert('RGB')
+    # count, density = LWCC.get_count(img_path, model_name="Bay", model_weights="SHB", return_density=True)
+
+    count_SHA, density_SHA = LWCC.get_count(img_path, model_name='Bay', model_weights='SHA', return_density=True)
+    count_SHB, density_SHB = LWCC.get_count(img_path, model_name='DM-Count', model_weights='SHB', return_density=True)
+    count_QNRF, density_QNRF = LWCC.get_count(img_path, model_name='Bay', model_weights='QNRF', return_density=True)
+
+    counts = [count_SHA, count_SHB, count_QNRF]
+    densities = [density_SHA, density_SHB, density_QNRF]
+    count = counts[counts.index(max(counts))]
+    density = densities[counts.index(max(counts))]
+    density = Image.fromarray(np.uint8(density * 255) , 'L') # turn it into Image
+    density = density.resize((img.size[0], img.size[1]), Image.BILINEAR)
+    fig = plt.figure()
+
+    plt.imshow(img, origin='upper')
+    plt.imshow(density, alpha=.7,origin='upper', cmap= plt.get_cmap("plasma"))
+    plt.legend('',frameon=False)
+    plt.axis('off')
+
+    fig.set_size_inches(15, 8.44)
+    fig.savefig('FaceRecognition\\static\\images\\count.jpg', bbox_inches='tight', pad_inches=0)
+
+    countObj = CrowdCount()
+    countObj.attendees_count = round(count)
+    countObj.instructor = Instructor(pk=1)
+    countObj.save()
+
+
+    return render(request, 'FaceRecognition/count.html', {'count': round(count)})
 
 
 def student_list(request):
@@ -152,7 +178,7 @@ def results(request):
             names.append(image.student.username.first_name)
 
 
-        attendees_image = face_recognition.load_image_file('FaceRecognition\\static\\images\\attendance.jpeg')
+        attendees_image = face_recognition.load_image_file('FaceRecognition\\static\\images\\attendance.jpg')
         face_locations = face_recognition.face_locations(attendees_image)
         face_encodings = face_recognition.face_encodings(attendees_image, face_locations)
         pil_image = Image.fromarray(attendees_image)
@@ -175,7 +201,7 @@ def results(request):
             # Draw a label with a name below the face
             text_width, text_height = draw.textsize(name)
             draw.rectangle(((left, bottom - text_height - 10), (right, bottom)), fill=(0, 0, 255), outline=(0, 0, 255))
-            draw.text((left + 6, bottom - text_height - 5), name, fill=(255, 255, 255, 255))
+            draw.text((left + 15, bottom - text_height - 5), name, fill=(255, 255, 255, 255))
         print(matches)
         print(matches1)
         for index, result in enumerate(matches): 
